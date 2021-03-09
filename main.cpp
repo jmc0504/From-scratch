@@ -3,19 +3,20 @@
 #include<algorithm>
 using namespace std;
 
-int N,P,result=0;
-vector<int>atm;
+string a;
+vector<int>minus_index;
+int result = 0, index = 0;
+
 int main(){
- cin>>N;
- for(int i=0; i<N; i++){
-   cin>>P;
-   atm.push_back(P);
- }
- sort(atm.begin(),atm.end());
- for(int i=0; i<N; i++){
-   for(int j=0; j<=i; j++){
-     result+=atm[j];
-   }
- }
- cout<<result;
+  int minus = 1;
+  cin>>a;
+  for(int i=0; i<a.size(); i++){
+    if(a[i] == '+' || a[i] == '-'){
+      result+=stoi(a.substr(index,i))*minus;
+      index = i+1;
+      if(a[i] == '-') minus = -1;
+    }
+  }
+  result+=stoi(a.substr(index,a.size()-index))*minus;
+  cout<<result;
 }
