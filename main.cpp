@@ -3,20 +3,26 @@
 #include<algorithm>
 using namespace std;
 
-string a;
-vector<int>minus_index;
-int result = 0, index = 0;
+long long n,price=0;
+vector<long long>road;
+vector<long long>oil;
 
 int main(){
-  int minus = 1;
-  cin>>a;
-  for(int i=0; i<a.size(); i++){
-    if(a[i] == '+' || a[i] == '-'){
-      result+=stoi(a.substr(index,i))*minus;
-      index = i+1;
-      if(a[i] == '-') minus = -1;
-    }
+  cin>>n;
+  for(int i=0; i<n-1; i++){
+    int o;
+    cin>>o;
+    road.push_back(o);
   }
-  result+=stoi(a.substr(index,a.size()-index))*minus;
-  cout<<result;
+  for(int i=0; i<n; i++){
+    int o;
+    cin>>o;
+    oil.push_back(o);
+  }
+  long long oil_price=1000000001,length;
+  for(int i=0; i<n; i++){
+    if(oil_price>oil[i]) oil_price = oil[i];
+    price+=oil_price*road[i];
+  }
+  cout<<price;
 }
