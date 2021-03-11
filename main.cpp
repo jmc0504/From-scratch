@@ -3,28 +3,24 @@
 #include<algorithm>
 using namespace std;
 
-int n,buffer;
-int result=0;
+int n,x,y;
 
-int disintegrate(int a){
-  int result=a, b=1;
-  while(b*10<a) b*=10;
-  while(b>0){
-    result+=a/b;
-    a-=b*(a/b);
-    b/=10;
-  }
-  return result;
-}
 
 
 int main(){
   cin>>n;
-  for(int i=1; i<n; i++){
-    if(disintegrate(i)==n){
-      result = i;
-      break;
-    }
+  vector<pair<int,int>>size(n);
+  vector<int>result(n,1);
+  for(int i=0; i<n; i++){
+    cin>>size[i].first>>size[i].second;
   }
-  cout<<result;
+  
+  for(int i=0; i<n; i++){
+    for(int j=0; j<n; j++){
+      if(size[i].first<size[j].first && size[i].second<size[j].second && i!=j) result[i]++;
+    }
+    cout<<result[i]<<" ";
+  }
+
+ 
 }
