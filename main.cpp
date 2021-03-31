@@ -2,23 +2,40 @@
 #include<stack>
 using namespace std;
 
-int n,result=0;
-stack<int>v;
+string x;
 
 int main(){
-  cin>>n;
-
-  for(int i=0; i<n; i++){
-    int l;
-    cin>>l;
-
-    if(l!=0){v.push(l);}
-    else{v.pop();}
-  }
   
-  for(int i=v.size(); i>0; i--){
-    result+=v.top();
-    v.pop();
+  while(true){
+    getline(cin,x);
+    stack<char> st;
+    if(x==".") break;
+    for(int i=0; i<x.size(); i++){
+      if(x[i] == '[' || x[i] == '(')
+        st.push(x[i]);
+
+      else if(x[i] == ']'){
+        if(st.empty() || st.top() != '['){
+          cout<<"no"<<endl;
+          break;
+        }
+        st.pop();
+      }
+    
+      else if(x[i] == ')'){
+        if(st.empty() || st.top() != '('){
+          cout<<"no"<<endl;
+          break;
+        }
+        st.pop();
+      }
+
+      if(i==x.size()-1){
+        if(st.empty())cout<<"yes"<<endl;
+        else cout<<"no"<<endl;
+      }
+
+    }
   }
-  cout<<result;
+  return 0;
 }
